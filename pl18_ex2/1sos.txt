@@ -1,0 +1,114 @@
+<y := 1 ; while (Not(Eq(x, 1))) do (y := Times(y, x) ; x := Minus(x, 1)), {'x': 5}> ==>
+
+<while (Not(Eq(x, 1))) do (y := Times(y, x) ; x := Minus(x, 1)), {'y': 1, 'x': 5}> ==>
+
+<if (Not(Eq(x, 1))) then (y := Times(y, x) ; x := Minus(x, 1) ; while (Not(Eq(x, 1))) do (y := Times(y, x) ; x := Minus(x, 1))) else (skip), {'y': 1, 'x': 5}> ==>
+
+<y := Times(y, x) ; x := Minus(x, 1) ; while (Not(Eq(x, 1))) do (y := Times(y, x) ; x := Minus(x, 1)), {'y': 1, 'x': 5}> ==>
+
+<x := Minus(x, 1) ; while (Not(Eq(x, 1))) do (y := Times(y, x) ; x := Minus(x, 1)), {'y': 5, 'x': 5}> ==>
+
+<while (Not(Eq(x, 1))) do (y := Times(y, x) ; x := Minus(x, 1)), {'y': 5, 'x': 4}> ==>
+
+<if (Not(Eq(x, 1))) then (y := Times(y, x) ; x := Minus(x, 1) ; while (Not(Eq(x, 1))) do (y := Times(y, x) ; x := Minus(x, 1))) else (skip), {'y': 5, 'x': 4}> ==>
+
+<y := Times(y, x) ; x := Minus(x, 1) ; while (Not(Eq(x, 1))) do (y := Times(y, x) ; x := Minus(x, 1)), {'y': 5, 'x': 4}> ==>
+
+<x := Minus(x, 1) ; while (Not(Eq(x, 1))) do (y := Times(y, x) ; x := Minus(x, 1)), {'y': 20, 'x': 4}> ==>
+
+<while (Not(Eq(x, 1))) do (y := Times(y, x) ; x := Minus(x, 1)), {'y': 20, 'x': 3}> ==>
+
+<if (Not(Eq(x, 1))) then (y := Times(y, x) ; x := Minus(x, 1) ; while (Not(Eq(x, 1))) do (y := Times(y, x) ; x := Minus(x, 1))) else (skip), {'y': 20, 'x': 3}> ==>
+
+<y := Times(y, x) ; x := Minus(x, 1) ; while (Not(Eq(x, 1))) do (y := Times(y, x) ; x := Minus(x, 1)), {'y': 20, 'x': 3}> ==>
+
+<x := Minus(x, 1) ; while (Not(Eq(x, 1))) do (y := Times(y, x) ; x := Minus(x, 1)), {'y': 60, 'x': 3}> ==>
+
+<while (Not(Eq(x, 1))) do (y := Times(y, x) ; x := Minus(x, 1)), {'y': 60, 'x': 2}> ==>
+
+<if (Not(Eq(x, 1))) then (y := Times(y, x) ; x := Minus(x, 1) ; while (Not(Eq(x, 1))) do (y := Times(y, x) ; x := Minus(x, 1))) else (skip), {'y': 60, 'x': 2}> ==>
+
+<y := Times(y, x) ; x := Minus(x, 1) ; while (Not(Eq(x, 1))) do (y := Times(y, x) ; x := Minus(x, 1)), {'y': 60, 'x': 2}> ==>
+
+<x := Minus(x, 1) ; while (Not(Eq(x, 1))) do (y := Times(y, x) ; x := Minus(x, 1)), {'y': 120, 'x': 2}> ==>
+
+<while (Not(Eq(x, 1))) do (y := Times(y, x) ; x := Minus(x, 1)), {'y': 120, 'x': 1}> ==>
+
+<if (Not(Eq(x, 1))) then (y := Times(y, x) ; x := Minus(x, 1) ; while (Not(Eq(x, 1))) do (y := Times(y, x) ; x := Minus(x, 1))) else (skip), {'y': 120, 'x': 1}> ==>
+
+<skip, {'y': 120, 'x': 1}> ==>
+
+{'y': 120, 'x': 1}
+<a := 84 ; b := 22 ; c := 0 ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {}> ==>
+
+<b := 22 ; c := 0 ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 84}> ==>
+
+<c := 0 ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 84, 'b': 22}> ==>
+
+<while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 84, 'c': 0, 'b': 22}> ==>
+
+<if (Not(Eq(b, 0))) then (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1))) else (skip), {'a': 84, 'c': 0, 'b': 22}> ==>
+
+<if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 84, 'c': 0, 'b': 22}> ==>
+
+<skip ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 84, 'c': 0, 'b': 22}> ==>
+
+<a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 84, 'c': 0, 'b': 22}> ==>
+
+<b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 168, 'c': 0, 'b': 22}> ==>
+
+<while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 168, 'c': 0, 'b': 11}> ==>
+
+<if (Not(Eq(b, 0))) then (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1))) else (skip), {'a': 168, 'c': 0, 'b': 11}> ==>
+
+<if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 168, 'c': 0, 'b': 11}> ==>
+
+<c := Plus(c, a) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 168, 'c': 0, 'b': 11}> ==>
+
+<a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 168, 'c': 168, 'b': 11}> ==>
+
+<b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 336, 'c': 168, 'b': 11}> ==>
+
+<while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 336, 'c': 168, 'b': 5}> ==>
+
+<if (Not(Eq(b, 0))) then (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1))) else (skip), {'a': 336, 'c': 168, 'b': 5}> ==>
+
+<if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 336, 'c': 168, 'b': 5}> ==>
+
+<c := Plus(c, a) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 336, 'c': 168, 'b': 5}> ==>
+
+<a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 336, 'c': 504, 'b': 5}> ==>
+
+<b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 672, 'c': 504, 'b': 5}> ==>
+
+<while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 672, 'c': 504, 'b': 2}> ==>
+
+<if (Not(Eq(b, 0))) then (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1))) else (skip), {'a': 672, 'c': 504, 'b': 2}> ==>
+
+<if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 672, 'c': 504, 'b': 2}> ==>
+
+<skip ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 672, 'c': 504, 'b': 2}> ==>
+
+<a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 672, 'c': 504, 'b': 2}> ==>
+
+<b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 1344, 'c': 504, 'b': 2}> ==>
+
+<while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 1344, 'c': 504, 'b': 1}> ==>
+
+<if (Not(Eq(b, 0))) then (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1))) else (skip), {'a': 1344, 'c': 504, 'b': 1}> ==>
+
+<if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 1344, 'c': 504, 'b': 1}> ==>
+
+<c := Plus(c, a) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 1344, 'c': 504, 'b': 1}> ==>
+
+<a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 1344, 'c': 1848, 'b': 1}> ==>
+
+<b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 2688, 'c': 1848, 'b': 1}> ==>
+
+<while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1)), {'a': 2688, 'c': 1848, 'b': 0}> ==>
+
+<if (Not(Eq(b, 0))) then (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1) ; while (Not(Eq(b, 0))) do (if (Not(Eq(BitAnd(b, 1), 0))) then (c := Plus(c, a)) else (skip) ; a := BitShiftLeft(a, 1) ; b := BitShiftRight(b, 1))) else (skip), {'a': 2688, 'c': 1848, 'b': 0}> ==>
+
+<skip, {'a': 2688, 'c': 1848, 'b': 0}> ==>
+
+{'a': 2688, 'c': 1848, 'b': 0}
