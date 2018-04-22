@@ -70,6 +70,15 @@ class While(Statement):
 # --- ADD HERE IN QUESTION 3 ---
 #
 
+class Repeat(Statement):
+    def __init__(self, b, S):
+        self.b = b
+        self.S = S
+    def __repr__(self):
+        return 'Repeat({}, {})'.format(self.b, self.S)
+    def __str__(self):
+        return 'repeat ({}) until ({})'.format(self.b, self.S)
+
 
 # Arithmetic Expressions
 

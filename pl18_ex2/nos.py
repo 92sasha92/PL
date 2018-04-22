@@ -50,6 +50,23 @@ def nos(S, s):
     elif type(S) is While and eval_bool_expr(S.b, s) is ff:
         return s
 
+    # elif type(S) is Repeat and eval_bool_expr(S.b, s) is ff:
+    #     sp = nos(S.S, s)
+    #     spp = nos(Repeat(S.b, S.S), sp)
+    #     return spp
+    #
+    # elif type(S) is Repeat and eval_bool_expr(S.b, s) is tt:
+    #     sp = nos(S.S, s)
+    #     return sp
+
+    elif type(S) is Repeat:
+        sp = nos(S.S, s)
+        if eval_bool_expr(S.b, sp) is ff:
+            spp = nos(Repeat(S.b, S.S), sp)
+            return spp
+        else:
+            return sp
+
     else:
         assert False # Error
 
@@ -73,3 +90,10 @@ if __name__ == '__main__':
     #
     # --- ADD MORE TESTS HERE ---
     #
+
+    prog3 = Comp(Assign('y', ALit(1)),
+                 Repeat((Not(LE(Var('x'), ALit(0)))),
+                        Comp(Assign('y', Plus(Var('y'), ALit(1))),
+                             Assign('x', Plus(Var('x'), ALit(1))))))
+
+    print nos(prog3, {'x': 1})
