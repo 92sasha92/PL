@@ -97,7 +97,7 @@ if __name__ == '__main__':
     run_sos(prog2, {})
 
     prog3 = Comp(Assign('y', ALit(1)),
-                 Repeat((Not(LE(Var('x'), ALit(4)))),
+                 Repeat((Not(LE(Var('x'), ALit(0)))),
                         Comp(Assign('y', Plus(Var('y'), ALit(1))),
                              Assign('x', Plus(Var('x'), ALit(1))))))
 
