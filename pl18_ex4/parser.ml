@@ -37,18 +37,18 @@ let rec parse_term = function
 	| LParen :: tr -> let (t1, ts) = parse_term tr in(
 		match ts with
 		| [] -> raise (SyntaxError "Error: expected right paren\n")
-		| RParen :: ts' -> t1, ts'
-		| _ -> let (t2, ts'') = parse_term ts in(
-            match ts'' with
+		| RParen :: ts1 -> t1, ts1
+		| _ -> let (t2, ts2) = parse_term ts in(
+            match ts2 with
 			| [] -> raise (SyntaxError "Error: expected right paren\n")
 			| RParen :: termList -> Application(t1, t2), termList
 			| _ -> raise (SyntaxError "Error: expected right paren\n")
 		)
 	)
-	| LetTok :: Literal x :: EqTok :: ts -> let (tr, ts') = parse_term ts in(
-        match ts' with
+	| LetTok :: Literal x :: EqTok :: ts -> let (tr, ts1) = parse_term ts in(
+        match ts1 with
         | [] -> raise (SyntaxError "Error: expected 'In' token\n")
-        | InTok :: ts'' -> let (t, termList) = parse_term ts'' in(
+        | InTok :: ts2 -> let (t, termList) = parse_term ts2 in(
             match termList with
             | _ -> Application((Abstraction (x, t)), tr), termList
         )
@@ -111,50 +111,50 @@ let rec parse_term_conv_rec (pr :term option) r =
 		| None-> parse_term_conv_rec (Some (Variable x))  termList
 		| Some term -> parse_term_conv_rec (Some (Application(term, Variable(x)))) termList
 		)	
-	| LParen :: tl ->  let (term, tl') = parse_term_conv_rec None tl in(
-		 match tl' with
+	| LParen :: tl ->  let (term, tl1) = parse_term_conv_rec None tl in(
+		 match tl1 with
 		| [] -> raise (SyntaxError "Error: expected right paren\n")
-		| RParen :: tl'' -> 
+		| RParen :: tl2 -> 
 			(match pr with
-			| None->  parse_term_conv_rec (Some(term)) tl''
-			| Some term' -> parse_term_conv_rec (Some(Application(term',term))) tl''
+			| None->  parse_term_conv_rec (Some(term)) tl2
+			| Some term1 -> parse_term_conv_rec (Some(Application(term1,term))) tl2
 			)
-		| _ -> let (term'', tl'') = parse_term_conv_rec (Some(term)) tl' in(
-			match tl'' with
+		| _ -> let (term2, tl2) = parse_term_conv_rec (Some(term)) tl1 in(
+			match tl2 with
 			| [] -> raise (SyntaxError "Error: expected right paren\n")
-			| RParen :: tl''' -> 
+			| RParen :: tl3 -> 
 				(match pr with
-				| None-> parse_term_conv_rec (Some(term'')) tl'''
-				| Some term''' -> parse_term_conv_rec (Some(Application(term''',term''))) tl'''
+				| None-> parse_term_conv_rec (Some(term2)) tl3
+				| Some term3 -> parse_term_conv_rec (Some(Application(term3, term2))) tl3
 				)
 			| _ -> raise (SyntaxError "Error: expected right paren\n")
 		)
 	)
-	| LambdaTok :: Literal id :: DotTok :: tl	-> let (term, tl') = parse_term_conv_rec None tl in( 
-		match tl' with
+	| LambdaTok :: Literal id :: DotTok :: tl	-> let (term, tl1) = parse_term_conv_rec None tl in( 
+		match tl1 with
 		| [] ->
 			(match pr with
-			| None -> parse_term_conv_rec (Some (Abstraction(id, term))) tl'
-			| Some term' -> parse_term_conv_rec (Some (Application(term', Abstraction(id, term)))) tl'
+			| None -> parse_term_conv_rec (Some (Abstraction(id, term))) tl1
+			| Some term1 -> parse_term_conv_rec (Some (Application(term1, Abstraction(id, term)))) tl1
 			)
-		| RParen :: tl'' ->
+		| RParen :: tl2 ->
 			(match pr with
-			| None -> parse_term_conv_rec (Some (Abstraction(id, term))) tl'
-			| Some term' -> parse_term_conv_rec (Some (Application(term', Abstraction(id, term)))) tl'
+			| None -> parse_term_conv_rec (Some (Abstraction(id, term))) tl1
+			| Some term1 -> parse_term_conv_rec (Some (Application(term1, Abstraction(id, term)))) tl1
 			)
-		| InTok:: tl'' ->
+		| InTok:: tl2 ->
 			(match pr with
-			| None -> parse_term_conv_rec (Some (Abstraction(id, term))) tl'
-			| Some term' -> parse_term_conv_rec (Some (Application(term', Abstraction(id, term)))) tl'
+			| None -> parse_term_conv_rec (Some (Abstraction(id, term))) tl1
+			| Some term1 -> parse_term_conv_rec (Some (Application(term1, Abstraction(id, term)))) tl1
 			)
 		| _ -> raise (SyntaxError "Error: not a Valid Term")
 	)
-	| LetTok :: Literal id :: EqTok :: tl ->  let (term, tl') = parse_term_conv_rec None tl in(
-        match tl' with
+	| LetTok :: Literal id :: EqTok :: tl ->  let (term, tl1) = parse_term_conv_rec None tl in(
+        match tl1 with
         | [] -> raise (SyntaxError "Error: expected 'In' token\n")
-        | InTok :: tl'' -> let (term', tl''') = parse_term_conv_rec None tl'' in(
-            match tl''' with
-            | _ -> parse_term_conv_rec (Some (Application((Abstraction (id, term')), term))) tl'''
+        | InTok :: tl2 -> let (term1, tl3) = parse_term_conv_rec None tl2 in(
+            match tl3 with
+            | _ -> parse_term_conv_rec (Some (Application((Abstraction (id, term1)), term))) tl3
         )
         | _ -> raise (SyntaxError "Error: expected 'In' token\n")
     )

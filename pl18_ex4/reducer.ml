@@ -56,10 +56,10 @@ let rec reduce_strict term=
 	| Application (tr1, tr2) -> 
 		let tro1 = reduce_strict tr1 in 
 		match tro1 with
-		| Some tr' -> Some (Application(tr',tr2))
+		| Some tr3 -> Some (Application(tr3,tr2))
 		| None ->  let tro2 = reduce_strict tr2 in 
 			match tro2 with
-			| Some tr' -> Some(Application(tr1,tr'))
+			| Some tr3 -> Some(Application(tr1,tr3))
 			| None ->  match tr1 with
 				| Variable id ->None
 				| Application (tr1, tr2)  -> None
@@ -71,25 +71,25 @@ let rec reduce_lazy = function
   | Variable v -> None
   | Abstraction (x, term) -> None
   | Application ((Abstraction (x, term1)), term2) ->  Some (substitute x term2 term1)
-  | Application (t1, t2) -> let t1'' = reduce_lazy t1 in(
-    match t1'' with
+  | Application (t1, t2) -> let t13 = reduce_lazy t1 in(
+    match t13 with
 			| None -> None
-            | Some t1' -> Some (Application (t1', t2)) 
+            | Some t14 -> Some (Application (t14, t2)) 
   )
 
 
 
 let rec reduce_normal = function
   | Variable v -> None
-  | Abstraction (x, t) -> let t' = reduce_normal t in (
-    match t' with
+  | Abstraction (x, t) -> let t1 = reduce_normal t in (
+    match t1 with
       | None -> None
       | Some term -> Some (Abstraction(x, term))
   )
   | Application (t1, t2) -> match t1 with
     | Abstraction (x, t) ->  Some (substitute x t2 t)
-    | _ -> let t1' = reduce_normal t1 in (
-      match t1' with
+    | _ -> let t13 = reduce_normal t1 in (
+      match t13 with
         | Some term1 -> Some (Application (term1, t2))
         | None -> let term2 = reduce_normal t2 in (
           match term2 with
