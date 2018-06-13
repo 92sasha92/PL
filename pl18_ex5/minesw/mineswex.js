@@ -57,11 +57,30 @@ function nxt() {
     } else {
         $(this).text(value);
         /* ADD YOUR CODE HERE */
+        if(value == 0){
+            revealZeroCells(row, col);
+        }
+        
     }
 }
 
+function revealZeroCells(row, col){
+    $(get_cell(row, col)).fadeIn();
+    for(var i = row -1; i <= row + 1;i++){
+        for(var j = col -1; j <= col + 1;j++){
+            if(i >= 0 && j >=0 && i < SZ && j < SZ && !(i == row && j == col)){
+                var cell = get_cell(i, j);
+                if(is_cell_hidden(cell)){
+                    $(cell).fadeIn(nxt);
+                }
+            }
+        }
+    }
+}
 
 $(function() {
     $('td').append('<div/>');
     $('td').mousedown(function() { $(this).find("div").fadeIn(nxt); });
 });
+
+
